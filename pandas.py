@@ -94,3 +94,95 @@ df_dict.drop("salary",axis=1) # remove column
 df_dict.drop(4,axis=0)# remove rows
 
 #for multiple row df_dict.drop([4,5],axis=0)
+df_dict["age"].mean()
+df_dict["age"].median()
+df_dict["age"].mode()
+
+#aggregation
+df_dict.agg({"Age":["mean","min","max","std"]})# also by describe
+df_dict.isnull() #checking null values
+df_dict.isnull().sum()
+#find the total null values
+#df_dict.dropna() #remove rows of null values
+#df_dict.dropna(axis=1)
+#drop columns with nulls
+
+df_dict.fillna(0) #fill the null values with 0
+
+df_med=df_dict.copy()
+df_med["age"].fillna(df_med["age"].mean().inplace=True)
+df_med["age"].fillna(df_med["age"].median().inplace=True)#do this seperately
+df_med["age"].fillna(df_med["age"].mode().inplace=True)
+
+z=df_dict["age"].mode()
+print(type(z))
+#mode will store as series of data .it is not recommend
+df_c=pd.DataFrame(
+    {
+        "col1":[10,None,30,50],
+        "col2":[None,,None,15,None]
+
+    }
+)
+print("Forward Fill:")#fill with before row value
+print(df_c.ffill())
+print("Backward fill")
+print(df_c.bfill())
+df_c
+
+
+#binding in data manipulation means combining multiple datasets
+#three methods are concatenation ,merging and join
+#row wise concatenation
+import pandas as pd 
+df1=pd.DataFrame({
+    "Name":["John","Priya"],
+    "Age":[25,30]
+
+})
+df2=pd.DataFrame({
+    "Name":["Alex","Sara"],
+    "Age":[22,28]
+})
+result=pd.concat([df1,df2],axis=0)
+print(result)
+#it will combine dataframes
+
+#column wise concatenation
+df3=pd.DataFrame({"City":["Delhi","Chennai","Mumbai","Pune"]})
+result1=pd.concat([df1,df3],axis=1)
+print(result1)
+
+#merging using common "ID" column
+dfA=pd.DataFrame({
+    "ID":[1,2,3],
+    "Name":["John","Priya","Alex"]
+
+})
+dfA=pd.DataFrame({
+    "ID":[1,2,4],
+    "Salary":[50000,60000,55000]
+
+})
+result=pd.merge(dfA,dfB,on="ID",how="inner")
+result
+
+#left join
+pd.merge(dfA,dfB,on="ID",how="left")
+
+#right join
+pd.merge(dfA,dfB,on="ID",how="right")
+
+
+#join function same like merge
+dfA=pd.DataFrame({
+    "Name":["John","Priya","Alex"]
+},inex=[1,2,3])
+
+dfB=pd.DataFrame({
+    "Salary":[50000,60000,55000]
+
+},index=[1,2,4])
+df_join=dfA.join(dfB,how="left")
+df_join
+
