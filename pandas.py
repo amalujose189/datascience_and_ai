@@ -110,9 +110,9 @@ df_dict.isnull().sum()
 df_dict.fillna(0) #fill the null values with 0
 
 df_med=df_dict.copy()
-df_med["age"].fillna(df_med["age"].mean().inplace=True)
-df_med["age"].fillna(df_med["age"].median().inplace=True)#do this seperately
-df_med["age"].fillna(df_med["age"].mode().inplace=True)
+df_med["age"].fillna(df_med["age"].mean(),inplace=True)
+df_med["age"].fillna(df_med["age"].median(),inplace=True)#do this seperately
+df_med["age"].fillna(df_med["age"].mode(),inplace=True)
 
 z=df_dict["age"].mode()
 print(type(z))
@@ -159,7 +159,7 @@ dfA=pd.DataFrame({
     "Name":["John","Priya","Alex"]
 
 })
-dfA=pd.DataFrame({
+dfB=pd.DataFrame({
     "ID":[1,2,4],
     "Salary":[50000,60000,55000]
 
@@ -177,7 +177,7 @@ pd.merge(dfA,dfB,on="ID",how="right")
 #join function same like merge
 dfA=pd.DataFrame({
     "Name":["John","Priya","Alex"]
-},inex=[1,2,3])
+},index=[1,2,3])
 
 dfB=pd.DataFrame({
     "Salary":[50000,60000,55000]
